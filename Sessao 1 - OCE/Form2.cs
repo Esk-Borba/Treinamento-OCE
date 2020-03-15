@@ -22,39 +22,38 @@ namespace Sessao_1___OCE
         {
             timer1.Enabled = true;
             timer1.Start();
-            timer1.Interval = 12000;
-            progressBar1.Maximum = 10;
+            timer1.Interval = 1300;
+            progressBar1.Maximum = 12;
             timer1.Tick += new EventHandler(timer1_Tick);
         }
 
         void timer1_Tick(object sender, EventArgs e)
         {
-            if (progressBar1.Value != 10)
+
+            progressBar1.Increment(1);
+            
+            if (progressBar1.Value == 1)
             {
-                progressBar1.Value++;
-                label1.Text = "Carregando componentes...";
-                if(timer1.Interval == 25)
-                {
-                    label1.Text = "Carregando dados...";
-                    progressBar1.Value++;
-                }
-                if (timer1.Interval == 50)
-                {
-                    label1.Text = "Carregando Imagens...";
-                    progressBar1.Value++;
-                }
-                if (timer1.Interval == 75)
-                {
-                    label1.Text = "Carregando dashboard...";
-                    progressBar1.Value++;
-                }
+                label1.Text = "Carregando Componentes...";
             }
-            else
+            if (progressBar1.Value == 4)
+            {
+                label1.Text = "Carregando Dados...";
+            }
+            if (progressBar1.Value == 7)
+            {
+                label1.Text = "Carregando Imagens...";
+            }
+            if (progressBar1.Value == 10)
+            {
+                label1.Text = "Carregando Dashboard...";
+            }
+            if (progressBar1.Value == progressBar1.Maximum)
             {
                 timer1.Stop();
                 new Form3().Show();
                 this.Hide();
-                  
+
             }
         }
     }
