@@ -12,11 +12,11 @@ namespace Sessao_1___OCE
 {
     public partial class Form2 : Form
     {
-        public Form2()
+        usuario usuario;
+        public Form2(usuario usuarioLogado)
         {
             InitializeComponent();
-
-
+            this.usuario = usuarioLogado;
         }
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -26,12 +26,9 @@ namespace Sessao_1___OCE
             progressBar1.Maximum = 12;
             timer1.Tick += new EventHandler(timer1_Tick);
         }
-
         void timer1_Tick(object sender, EventArgs e)
         {
-
             progressBar1.Increment(1);
-            
             if (progressBar1.Value == 1)
             {
                 label1.Text = "Carregando Componentes...";
@@ -51,9 +48,8 @@ namespace Sessao_1___OCE
             if (progressBar1.Value == progressBar1.Maximum)
             {
                 timer1.Stop();
-                new Form3().Show();
+                new Form3(usuario).Show();
                 this.Hide();
-
             }
         }
     }

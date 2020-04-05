@@ -26,5 +26,9 @@ namespace Sessao_1___OCE
         }
     
         public virtual DbSet<usuario> usuario { get; set; }
+        public virtual DbSet<imagensPrograma> imagensPrograma { get; set; }
+        public virtual DbSet<cidades> cidades { get; set; }
+        public virtual DbSet<estados> estados { get; set; }
+        public virtual DbSet<pais> pais { get; set; }
     }
 }

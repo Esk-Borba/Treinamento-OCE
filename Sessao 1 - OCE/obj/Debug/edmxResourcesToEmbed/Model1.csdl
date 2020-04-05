@@ -7,19 +7,143 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="data_nascimento" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="foto" Type="Boolean" Nullable="false" />
     <Property Name="telefone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="e_mail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="senha" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="cep" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="enderaco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="imagem" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="cidades" Relationship="Model.FK_cidades_usuario" FromRole="usuario" ToRole="cidades" />
+    <NavigationProperty Name="estados" Relationship="Model.FK_estados_usuario" FromRole="usuario" ToRole="estados" />
+    <NavigationProperty Name="pais1" Relationship="Model.FK_pais_usuario" FromRole="usuario" ToRole="pais" />
   </EntityType>
   <EntityContainer Name="sessao_1_OCEEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <EntitySet Name="imagensPrograma" EntityType="Model.imagensPrograma" />
+    <EntitySet Name="cidades" EntityType="Model.cidades" />
+    <EntitySet Name="estados" EntityType="Model.estados" />
+    <EntitySet Name="pais" EntityType="Model.pais" />
+    <AssociationSet Name="FK_cidades_estados" Association="Model.FK_cidades_estados">
+      <End Role="estados" EntitySet="estados" />
+      <End Role="cidades" EntitySet="cidades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_cidades_usuario" Association="Model.FK_cidades_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="cidades" EntitySet="cidades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_estados_pais" Association="Model.FK_estados_pais">
+      <End Role="pais" EntitySet="pais" />
+      <End Role="estados" EntitySet="estados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_estados_usuario" Association="Model.FK_estados_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="estados" EntitySet="estados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pais_usuario" Association="Model.FK_pais_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="pais" EntitySet="pais" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="imagensPrograma">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="enderecoImagem" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="cidades">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cidade" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="id_cidade" Type="Int32" Nullable="false" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="estados" Relationship="Model.FK_cidades_estados" FromRole="cidades" ToRole="estados" />
+    <NavigationProperty Name="usuario" Relationship="Model.FK_cidades_usuario" FromRole="cidades" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="estados">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="estado" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="id_pais" Type="Int32" Nullable="false" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="cidades" Relationship="Model.FK_cidades_estados" FromRole="estados" ToRole="cidades" />
+    <NavigationProperty Name="pais" Relationship="Model.FK_estados_pais" FromRole="estados" ToRole="pais" />
+    <NavigationProperty Name="usuario" Relationship="Model.FK_estados_usuario" FromRole="estados" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="pais">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pais1" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="estados" Relationship="Model.FK_estados_pais" FromRole="pais" ToRole="estados" />
+    <NavigationProperty Name="usuario" Relationship="Model.FK_pais_usuario" FromRole="pais" ToRole="usuario" />
+  </EntityType>
+  <Association Name="FK_cidades_estados">
+    <End Type="Model.estados" Role="estados" Multiplicity="1" />
+    <End Type="Model.cidades" Role="cidades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estados">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cidades">
+        <PropertyRef Name="id_cidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_cidades_usuario">
+    <End Type="Model.usuario" Role="usuario" Multiplicity="1" />
+    <End Type="Model.cidades" Role="cidades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cidades">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_estados_pais">
+    <End Type="Model.pais" Role="pais" Multiplicity="1" />
+    <End Type="Model.estados" Role="estados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pais">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="estados">
+        <PropertyRef Name="id_pais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_estados_usuario">
+    <End Type="Model.usuario" Role="usuario" Multiplicity="1" />
+    <End Type="Model.estados" Role="estados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="estados">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pais_usuario">
+    <End Type="Model.usuario" Role="usuario" Multiplicity="1" />
+    <End Type="Model.pais" Role="pais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="pais">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

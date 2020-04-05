@@ -14,19 +14,31 @@ namespace Sessao_1___OCE
     
     public partial class usuario
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public usuario()
+        {
+            this.cidades = new HashSet<cidades>();
+            this.estados = new HashSet<estados>();
+            this.pais1 = new HashSet<pais>();
+        }
+    
         public int id { get; set; }
         public string nome { get; set; }
         public System.DateTime data_nascimento { get; set; }
-        public bool foto { get; set; }
         public string telefone { get; set; }
         public string celular { get; set; }
         public string e_mail { get; set; }
         public string senha { get; set; }
         public string cep { get; set; }
-        public string pais { get; set; }
-        public string estado { get; set; }
-        public string cidade { get; set; }
         public string bairro { get; set; }
         public string enderaco { get; set; }
+        public string imagem { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cidades> cidades { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<estados> estados { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<pais> pais1 { get; set; }
     }
 }

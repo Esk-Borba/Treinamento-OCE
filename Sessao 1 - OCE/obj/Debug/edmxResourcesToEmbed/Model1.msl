@@ -4,20 +4,54 @@
     <EntitySetMapping Name="usuario">
       <EntityTypeMapping TypeName="Model.usuario">
         <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="imagem" ColumnName="imagem" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="nome" ColumnName="nome" />
           <ScalarProperty Name="data_nascimento" ColumnName="data-nascimento" />
-          <ScalarProperty Name="foto" ColumnName="foto" />
           <ScalarProperty Name="telefone" ColumnName="telefone" />
           <ScalarProperty Name="celular" ColumnName="celular" />
           <ScalarProperty Name="e_mail" ColumnName="e-mail" />
           <ScalarProperty Name="senha" ColumnName="senha" />
           <ScalarProperty Name="cep" ColumnName="cep" />
-          <ScalarProperty Name="pais" ColumnName="pais" />
-          <ScalarProperty Name="estado" ColumnName="estado" />
-          <ScalarProperty Name="cidade" ColumnName="cidade" />
           <ScalarProperty Name="bairro" ColumnName="bairro" />
           <ScalarProperty Name="enderaco" ColumnName="enderaco" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="imagensPrograma">
+      <EntityTypeMapping TypeName="Model.imagensPrograma">
+        <MappingFragment StoreEntitySet="imagensPrograma">
+          <ScalarProperty Name="enderecoImagem" ColumnName="enderecoImagem" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cidades">
+      <EntityTypeMapping TypeName="Model.cidades">
+        <MappingFragment StoreEntitySet="cidades">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_cidade" ColumnName="id_cidade" />
+          <ScalarProperty Name="cidade" ColumnName="cidade" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="estados">
+      <EntityTypeMapping TypeName="Model.estados">
+        <MappingFragment StoreEntitySet="estados">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pais">
+      <EntityTypeMapping TypeName="Model.pais">
+        <MappingFragment StoreEntitySet="pais">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="pais1" ColumnName="pais" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -118,3 +118,4 @@ C:\Users\Vinicius\Desktop\Treinamento-OCE\Treinamento-OCE\Sessao 1 - OCE\obj\Deb
 C:\Users\Vinicius\Desktop\Treinamento-OCE\Treinamento-OCE\Sessao 1 - OCE\obj\Debug\Sessao 1 - OCE.csproj.CopyComplete
 C:\Users\Vinicius\Desktop\Treinamento-OCE\Treinamento-OCE\Sessao 1 - OCE\obj\Debug\Sessao 1 - OCE.exe
 C:\Users\Vinicius\Desktop\Treinamento-OCE\Treinamento-OCE\Sessao 1 - OCE\obj\Debug\Sessao 1 - OCE.pdb
+C:\Users\Vinicius\Desktop\Treinamento-OCE\Treinamento-OCE\Sessao 1 - OCE\obj\Debug\Sessao_1___OCE.Form3.resources

@@ -1,0 +1,6 @@
+Orientações
+Apresentar somente a ComboBox do país
+Depois de selecionar o país
+Apresentar os estados que estão relacionados a ele
+Depois de selecionar o estado
+Apresentar as cidades que estão relacionados a ela

@@ -4,8 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4278da3001bb4174969f893f24960a2b" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.usuario" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="4278da3001bb4174969f893f24960a2b" Name="Diagram1" ZoomLevel="124">
+        <EntityTypeShape EntityType="Model.usuario" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.imagensPrograma" Width="1.5" PointX="5.5" PointY="1.75" />
+        <EntityTypeShape EntityType="Model.cidades" Width="1.5" PointX="12.5" PointY="3.125" />
+        <EntityTypeShape EntityType="Model.estados" Width="1.5" PointX="10" PointY="3.75" />
+        <EntityTypeShape EntityType="Model.pais" Width="1.5" PointX="12.125" PointY="6.75" />
+        <AssociationConnector Association="Model.FK_cidades_estados" />
+        <AssociationConnector Association="Model.FK_cidades_usuario" />
+        <AssociationConnector Association="Model.FK_estados_pais" />
+        <AssociationConnector Association="Model.FK_estados_usuario" />
+        <AssociationConnector Association="Model.FK_pais_usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,5 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cidades">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cidade" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="id_cidade" Type="int" Nullable="false" />
+    <Property Name="id_usuario" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="estados">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="estado" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="id_pais" Type="int" Nullable="false" />
+    <Property Name="id_usuario" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="imagensPrograma">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="enderecoImagem" Type="varchar" MaxLength="300" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pais">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pais" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="id_usuario" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="usuario">
     <Key>
       <PropertyRef Name="id" />
@@ -7,19 +40,100 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="data-nascimento" Type="date" Nullable="false" />
-    <Property Name="foto" Type="bit" Nullable="false" />
     <Property Name="telefone" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="celular" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="e-mail" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="senha" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="cep" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="pais" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="cidade" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="bairro" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="enderaco" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="imagem" Type="varchar" MaxLength="300" Nullable="false" />
   </EntityType>
+  <Association Name="FK_cidades_estados">
+    <End Role="estados" Type="Self.estados" Multiplicity="1" />
+    <End Role="cidades" Type="Self.cidades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estados">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cidades">
+        <PropertyRef Name="id_cidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_cidades_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="cidades" Type="Self.cidades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="cidades">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_estados_pais">
+    <End Role="pais" Type="Self.pais" Multiplicity="1" />
+    <End Role="estados" Type="Self.estados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pais">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="estados">
+        <PropertyRef Name="id_pais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_estados_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="estados" Type="Self.estados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="estados">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pais_usuario">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+    <End Role="pais" Type="Self.pais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="pais">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="cidades" EntityType="Self.cidades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="estados" EntityType="Self.estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="imagensPrograma" EntityType="Self.imagensPrograma" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pais" EntityType="Self.pais" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_cidades_estados" Association="Self.FK_cidades_estados">
+      <End Role="estados" EntitySet="estados" />
+      <End Role="cidades" EntitySet="cidades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_cidades_usuario" Association="Self.FK_cidades_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="cidades" EntitySet="cidades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_estados_pais" Association="Self.FK_estados_pais">
+      <End Role="pais" EntitySet="pais" />
+      <End Role="estados" EntitySet="estados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_estados_usuario" Association="Self.FK_estados_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="estados" EntitySet="estados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pais_usuario" Association="Self.FK_pais_usuario">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="pais" EntitySet="pais" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>
